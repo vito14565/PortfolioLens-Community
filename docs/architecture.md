@@ -12,6 +12,7 @@ Python mock analytics
   -> data/sample_portfolio.json
   -> tools/mock_analytics.py
   -> docs/mock-analytics.md
+  -> docs/mock-analytics.json
 
 CI
   -> .github/workflows/ci.yml
@@ -28,7 +29,7 @@ The app is intentionally small:
 - `src/App.tsx` composes the dashboard, portfolio, watchlist, and stock research sections.
 - `src/data/mockData.ts` stores fictional sample values.
 - `src/styles.css` contains the visual system and responsive layout.
-- `tools/mock_analytics.py` demonstrates a dependency-free Python workflow for generating a sample markdown report from fictional portfolio JSON.
+- `tools/mock_analytics.py` demonstrates a dependency-free Python workflow for generating sample markdown and JSON reports from fictional portfolio JSON.
 - `.github/workflows/ci.yml` runs the frontend build, dependency audit, Python tests, and mock analytics generation on pushes and pull requests.
 - `.github/workflows/pages.yml` builds the static Vite app for GitHub Pages when Pages is enabled in repository settings.
 

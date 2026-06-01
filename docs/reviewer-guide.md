@@ -17,6 +17,7 @@ This guide gives reviewers a quick path through PortfolioLens Community.
 
    ```bash
    python3 tools/mock_analytics.py
+   python3 tools/mock_analytics.py --format json --output docs/mock-analytics.json
    ```
 
 5. Check CI coverage in `.github/workflows/ci.yml`.
@@ -25,7 +26,7 @@ This guide gives reviewers a quick path through PortfolioLens Community.
 
 - Clear separation between mock data and production-style integrations.
 - A useful frontend structure for a fintech dashboard.
-- Python usage that demonstrates analytics workflow shape without exposing private model logic.
+- Python usage that demonstrates markdown and JSON analytics workflow shape without exposing private model logic.
 - Documentation that explains setup, architecture, security boundaries, and future roadmap.
 
 ## Safety Notes
@@ -34,4 +35,3 @@ This guide gives reviewers a quick path through PortfolioLens Community.
 - `.env.example` uses placeholders only.
 - All sample portfolio values are fictional.
 - The Python analytics script uses simple transparent calculations for demonstration, not predictive scoring.
-

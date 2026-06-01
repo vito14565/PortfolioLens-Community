@@ -47,6 +47,21 @@ def summarize(portfolio: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def sector_exposure(summary: dict[str, Any]) -> list[dict[str, Any]]:
+    total_value = float(summary["total_value"])
+    rows = []
+
+    for sector, value in sorted(summary["sector_values"].items(), key=lambda item: item[1], reverse=True):
+        weight = value / total_value * 100 if total_value else 0.0
+        rows.append({
+            "sector": sector,
+            "value": round(value, 2),
+            "weight_pct": round(weight, 1),
+        })
+
+    return rows
+
+
 def render_markdown(summary: dict[str, Any]) -> str:
     lines = [
         f"# {summary['name']} Mock Analytics",
@@ -67,9 +82,8 @@ def render_markdown(summary: dict[str, Any]) -> str:
         "",
     ]
 
-    for sector, value in sorted(summary["sector_values"].items(), key=lambda item: item[1], reverse=True):
-        weight = value / summary["total_value"] * 100 if summary["total_value"] else 0
-        lines.append(f"- {sector}: {weight:.1f}%")
+    for row in sector_exposure(summary):
+        lines.append(f"- {row['sector']}: {row['weight_pct']:.1f}%")
 
     lines.extend([
         "",
@@ -81,17 +95,41 @@ def render_markdown(summary: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def render_json(summary: dict[str, Any]) -> str:
+    payload = {
+        "portfolio_name": summary["name"],
+        "currency": summary["currency"],
+        "holding_count": summary["holding_count"],
+        "total_value": round(float(summary["total_value"]), 2),
+        "weighted_return_pct": round(float(summary["weighted_return_pct"]), 1),
+        "largest_holding": {
+            "symbol": summary["top_holding"],
+            "weight_pct": round(float(summary["top_holding_weight"]), 1),
+        },
+        "sector_exposure": sector_exposure(summary),
+        "disclaimer": "Generated from mock data only. Not investment advice.",
+    }
+    return json.dumps(payload, indent=2, sort_keys=True)
+
+
+def render_report(summary: dict[str, Any], output_format: str) -> str:
+    if output_format == "json":
+        return render_json(summary)
+    return render_markdown(summary)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate mock portfolio analytics markdown.")
     parser.add_argument("--input", default="data/sample_portfolio.json", help="Path to mock portfolio JSON.")
-    parser.add_argument("--output", default="docs/mock-analytics.md", help="Path for generated markdown.")
+    parser.add_argument("--output", default="docs/mock-analytics.md", help="Path for generated report.")
+    parser.add_argument("--format", choices=["markdown", "json"], default="markdown", help="Report output format.")
     args = parser.parse_args()
 
     portfolio = load_portfolio(Path(args.input))
-    markdown = render_markdown(summarize(portfolio))
+    report = render_report(summarize(portfolio), args.format)
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(markdown, encoding="utf-8")
+    output_path.write_text(report, encoding="utf-8")
     print(f"Wrote {output_path}")
 
 

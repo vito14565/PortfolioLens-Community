@@ -23,4 +23,4 @@
 - [ ] `npm audit --audit-level=moderate`
 - [ ] `python3 -m unittest discover -s tests -v`
 - [ ] `python3 tools/mock_analytics.py`
-
+- [ ] `python3 tools/mock_analytics.py --format json --output docs/mock-analytics.json`

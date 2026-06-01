@@ -32,7 +32,7 @@ All data in this repository is static mock data for UI demonstration only.
 - Watchlist page with sortable sample securities
 - Stock research page with chart-like price history, signal summary, and technical indicators
 - Responsive layout for desktop and mobile
-- Local Python utility that turns fictional sample holdings into a markdown analytics report
+- Local Python utility that turns fictional sample holdings into markdown or JSON analytics reports
 - Safe local development with no private services required
 
 ## Tech Stack
@@ -71,6 +71,12 @@ Generate the mock analytics report:
 python3 tools/mock_analytics.py
 ```
 
+Generate structured mock analytics JSON:
+
+```bash
+python3 tools/mock_analytics.py --format json --output docs/mock-analytics.json
+```
+
 Run Python tests:
 
 ```bash
@@ -91,6 +97,7 @@ PortfolioLens Community is for demonstration, education, and UI review only. It 
 - [Screenshots](docs/screenshots.md)
 - [Reviewer Guide](docs/reviewer-guide.md)
 - [Mock Analytics](docs/mock-analytics.md)
+- [Mock Analytics JSON](docs/mock-analytics.json)
 - [Roadmap](ROADMAP.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
