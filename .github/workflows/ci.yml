@@ -1,0 +1,41 @@
+name: Community CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=moderate
+
+      - name: Run Python tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate mock analytics report
+        run: python tools/mock_analytics.py

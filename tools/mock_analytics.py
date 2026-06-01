@@ -32,6 +32,8 @@ def summarize(portfolio: dict[str, Any]) -> dict[str, Any]:
         sector_values[sector] = sector_values.get(sector, 0.0) + value
 
     top_holding = max(holdings, key=lambda item: float(item.get("value", 0)), default={})
+    top_value = float(top_holding.get("value", 0)) if top_holding else 0.0
+    top_weight = top_value / total_value * 100 if total_value else 0.0
 
     return {
         "name": portfolio.get("portfolio_name", "Sample Portfolio"),
@@ -40,6 +42,7 @@ def summarize(portfolio: dict[str, Any]) -> dict[str, Any]:
         "total_value": total_value,
         "weighted_return_pct": weighted_return,
         "top_holding": top_holding.get("symbol", "N/A"),
+        "top_holding_weight": top_weight,
         "sector_values": sector_values,
     }
 
@@ -54,6 +57,11 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- Total value: {summary['currency']} {summary['total_value']:,.0f}",
         f"- Weighted sample return: {summary['weighted_return_pct']:.1f}%",
         f"- Largest holding: {summary['top_holding']}",
+        (
+            "- Concentration note: "
+            f"{summary['top_holding']} is the largest sample holding at "
+            f"{summary['top_holding_weight']:.1f}%"
+        ),
         "",
         "## Sector Exposure",
         "",

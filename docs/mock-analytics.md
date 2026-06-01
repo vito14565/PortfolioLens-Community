@@ -6,6 +6,7 @@ This report is generated from fictional sample data for the community showcase.
 - Total value: USD 54,260
 - Weighted sample return: 9.7%
 - Largest holding: MSFT
+- Concentration note: MSFT is the largest sample holding at 33.9%
 
 ## Sector Exposure
 

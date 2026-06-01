@@ -1,5 +1,7 @@
 # PortfolioLens Community
 
+[![Community CI](https://github.com/vito14565/PortfolioLens-Community/actions/workflows/ci.yml/badge.svg)](https://github.com/vito14565/PortfolioLens-Community/actions/workflows/ci.yml)
+
 PortfolioLens Community is a public, mock-data showcase for a modern portfolio and stock research dashboard. It is designed for open-source review, product demonstration, and safe experimentation without exposing private backend code or proprietary investment logic.
 
 ## What This Is
@@ -63,6 +65,12 @@ Generate the mock analytics report:
 
 ```bash
 python3 tools/mock_analytics.py
+```
+
+Run Python tests:
+
+```bash
+python3 -m unittest discover -s tests -v
 ```
 
 ## Environment Variables
