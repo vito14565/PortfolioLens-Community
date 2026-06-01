@@ -244,7 +244,8 @@ p {
 }
 
 .section-grid,
-.research-layout {
+.research-layout,
+.analytics-lab {
   display: grid;
   grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
   gap: 28px;
@@ -259,6 +260,8 @@ p {
 .table-panel,
 .watchlist-panel,
 .research-card,
+.analytics-summary,
+.sector-panel,
 .activity-panel {
   padding: 22px;
 }
@@ -447,6 +450,41 @@ p {
   border-color: rgba(246, 191, 101, 0.42);
 }
 
+.analytics-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.54fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.analytics-summary {
+  display: grid;
+  gap: 14px;
+}
+
+.sector-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.sector-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(120px, 0.72fr) 64px;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.sector-row div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.sector-row span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .activity-panel {
   display: grid;
   gap: 18px;
@@ -510,7 +548,8 @@ footer {
   .top-nav,
   .hero-panel,
   .section-grid,
-  .research-layout {
+  .research-layout,
+  .analytics-lab {
     grid-template-columns: 1fr;
   }
 
@@ -572,7 +611,13 @@ footer {
 
   .watchlist-panel,
   .indicator-grid,
+  .analytics-grid,
   .safety-grid {
     grid-template-columns: 1fr;
+  }
+
+  .sector-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }

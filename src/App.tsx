@@ -4,6 +4,7 @@ import SectionHeader from './components/SectionHeader'
 import Sparkline from './components/Sparkline'
 import { activity, holdings, indicators, pricePath, watchlist, type WatchItem } from './data/mockData'
 import { money, signedPercent } from './utils/format'
+import { buildAnalyticsSnapshot } from './utils/mockAnalytics'
 
 type WatchFilter = 'All' | WatchItem['category']
 
@@ -157,6 +158,40 @@ function Research() {
   )
 }
 
+function AnalyticsLab() {
+  const analytics = useMemo(() => buildAnalyticsSnapshot(holdings), [])
+
+  return (
+    <section className="analytics-lab" id="analytics">
+      <SectionHeader eyebrow="Python-inspired analytics" title="Mock analytics lab">
+        A frontend view of the same safe sample analytics shape produced by the Python utility.
+      </SectionHeader>
+      <div className="analytics-grid">
+        <div className="panel analytics-summary">
+          <MetricCard label="Mock risk" value={analytics.riskLabel} detail="Transparent sample calculation" />
+          <MetricCard label="Largest holding" value={analytics.largestHolding} detail={`${analytics.largestHoldingWeightPct.toFixed(1)}% of sample value`} />
+          <MetricCard label="Weighted return" value={signedPercent(analytics.weightedReturnPct)} detail="Calculated from fictional holdings" />
+        </div>
+        <div className="panel sector-panel">
+          <p className="section-label">Sector exposure</p>
+          {analytics.sectorExposure.map(item => (
+            <div className="sector-row" key={item.sector}>
+              <div>
+                <strong>{item.sector}</strong>
+                <span>{money.format(item.value)}</span>
+              </div>
+              <div className="bar-track">
+                <i style={{ width: `${item.weightPct}%` }} />
+              </div>
+              <span>{item.weightPct.toFixed(1)}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Activity() {
   return (
     <section className="panel activity-panel">
@@ -188,12 +223,14 @@ export default function App() {
           <a href="#portfolio">Portfolio</a>
           <a href="#watchlist">Watchlist</a>
           <a href="#research">Research</a>
+          <a href="#analytics">Analytics</a>
         </div>
       </nav>
       <Dashboard />
       <Portfolio />
       <Watchlist />
       <Research />
+      <AnalyticsLab />
       <Activity />
       <footer>
         PortfolioLens Community is a mock-data showcase. It is not investment advice.

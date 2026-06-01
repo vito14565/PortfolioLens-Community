@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:frontend": "tsc --noEmit -p tsconfig.test.json"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.1",

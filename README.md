@@ -31,6 +31,7 @@ All data in this repository is static mock data for UI demonstration only.
 - Portfolio page with holdings, allocation, performance cards, and activity timeline
 - Watchlist page with sortable sample securities
 - Stock research page with chart-like price history, signal summary, and technical indicators
+- Mock analytics lab that mirrors the Python sample analytics workflow in the UI
 - Responsive layout for desktop and mobile
 - Local Python utility that turns fictional sample holdings into markdown or JSON analytics reports
 - Safe local development with no private services required
@@ -75,6 +76,12 @@ Build check:
 
 ```bash
 npm run build
+```
+
+Frontend typecheck test:
+
+```bash
+npm run test:frontend
 ```
 
 Generate the mock analytics report:

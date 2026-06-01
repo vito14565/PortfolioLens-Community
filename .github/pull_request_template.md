@@ -20,6 +20,7 @@
 ## Verification
 
 - [ ] `npm run build`
+- [ ] `npm run test:frontend`
 - [ ] `npm audit --audit-level=moderate`
 - [ ] `python3 -m unittest discover -s tests -v`
 - [ ] `python3 tools/mock_analytics.py`
