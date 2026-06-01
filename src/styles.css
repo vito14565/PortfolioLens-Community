@@ -28,6 +28,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 18% -10%, rgba(85, 214, 190, 0.2), transparent 34rem),
     radial-gradient(circle at 88% 4%, rgba(138, 167, 255, 0.18), transparent 30rem),
@@ -495,7 +496,9 @@ footer {
 
 @media (max-width: 860px) {
   main {
-    width: min(100% - 20px, 680px);
+    width: calc(100% - 20px);
+    max-width: 680px;
+    overflow-x: hidden;
   }
 
   .top-nav,
@@ -516,13 +519,46 @@ footer {
     display: grid;
   }
 
+  .top-nav div {
+    justify-content: flex-start;
+  }
+
   .hero-panel {
     min-height: 0;
     padding: 18px;
+    overflow: hidden;
+  }
+
+  .hero-panel > * {
+    min-width: 0;
+  }
+
+  .hero-copy {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .hero-copy p:not(.section-label) {
+    width: min(100%, 31ch);
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(38px, 11vw, 46px);
+    overflow-wrap: anywhere;
   }
 
   .hero-visual {
+    min-width: 0;
     min-height: 320px;
+    overflow: hidden;
+  }
+
+  .sparkline {
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .holding-row {

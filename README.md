@@ -46,7 +46,19 @@ All data in this repository is static mock data for UI demonstration only.
 
 ## Screenshots
 
-Screenshots can be added under `docs/screenshots/`. See [docs/screenshots.md](docs/screenshots.md) for the recommended capture list.
+These screenshots are captured from the local mock-data demo.
+
+![Dashboard overview](docs/screenshots/dashboard-overview.jpg)
+
+![Portfolio holdings](docs/screenshots/portfolio-holdings.jpg)
+
+![Watchlist filtered view](docs/screenshots/watchlist-filtered.jpg)
+
+![Stock research indicators](docs/screenshots/stock-research.jpg)
+
+![Mobile overview](docs/screenshots/mobile-overview.jpg)
+
+See [docs/screenshots.md](docs/screenshots.md) for capture notes.
 
 ## Live Demo
 
