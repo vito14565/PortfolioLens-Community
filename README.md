@@ -48,6 +48,10 @@ All data in this repository is static mock data for UI demonstration only.
 
 Screenshots can be added under `docs/screenshots/`. See [docs/screenshots.md](docs/screenshots.md) for the recommended capture list.
 
+## Live Demo
+
+This repository includes a GitHub Pages workflow in `.github/workflows/pages.yml`. To publish the static demo, enable GitHub Pages from GitHub Actions in the repository settings, then run the `Publish Demo` workflow or push to `main`.
+
 ## Getting Started
 
 ```bash
@@ -85,9 +89,12 @@ PortfolioLens Community is for demonstration, education, and UI review only. It 
 
 - [Architecture](docs/architecture.md)
 - [Screenshots](docs/screenshots.md)
+- [Reviewer Guide](docs/reviewer-guide.md)
+- [Mock Analytics](docs/mock-analytics.md)
 - [Roadmap](ROADMAP.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
+- [Changelog](CHANGELOG.md)
 
 ## License
 

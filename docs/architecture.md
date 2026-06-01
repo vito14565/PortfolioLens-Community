@@ -15,6 +15,10 @@ Python mock analytics
 
 CI
   -> .github/workflows/ci.yml
+
+GitHub Pages
+  -> .github/workflows/pages.yml
+  -> dist static artifact
 ```
 
 ## Design
@@ -26,6 +30,11 @@ The app is intentionally small:
 - `src/styles.css` contains the visual system and responsive layout.
 - `tools/mock_analytics.py` demonstrates a dependency-free Python workflow for generating a sample markdown report from fictional portfolio JSON.
 - `.github/workflows/ci.yml` runs the frontend build, dependency audit, Python tests, and mock analytics generation on pushes and pull requests.
+- `.github/workflows/pages.yml` builds the static Vite app for GitHub Pages when Pages is enabled in repository settings.
+
+## Deployment
+
+The app is deployable as a static site. The Vite build uses `/PortfolioLens-Community/` as the production base path so assets resolve correctly on GitHub Pages. Local development still runs at `/`.
 
 ## Data Boundary
 

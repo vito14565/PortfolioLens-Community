@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest a community-edition improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please keep suggestions aligned with the mock-data community edition. Do not request private prediction logic, paid provider integrations, or real account data.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What would this improvement help with?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the smallest useful version.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Dashboard
+        - Portfolio tracking
+        - Watchlist
+        - Stock research layout
+        - Python mock analytics
+        - Documentation
+        - CI
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Community boundary
+      options:
+        - label: This can be implemented with mock data only.
+          required: true
+
