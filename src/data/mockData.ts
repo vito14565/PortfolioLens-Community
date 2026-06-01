@@ -1,15 +1,18 @@
 export type Holding = {
   symbol: string
   name: string
+  sector: string
   allocation: number
   value: number
   returnPct: number
   dayPct: number
+  thesis: string
 }
 
 export type WatchItem = {
   symbol: string
   name: string
+  category: 'Momentum' | 'Pullback' | 'Core'
   price: number
   changePct: number
   signal: string
@@ -23,17 +26,17 @@ export type Indicator = {
 }
 
 export const holdings: Holding[] = [
-  { symbol: 'MSFT', name: 'Microsoft', allocation: 34, value: 18420, returnPct: 12.4, dayPct: 0.8 },
-  { symbol: 'AAPL', name: 'Apple', allocation: 24, value: 12980, returnPct: 6.7, dayPct: -0.3 },
-  { symbol: 'NVDA', name: 'NVIDIA', allocation: 18, value: 9740, returnPct: 21.8, dayPct: 1.9 },
-  { symbol: 'CASH', name: 'Cash reserve', allocation: 24, value: 13120, returnPct: 0, dayPct: 0 },
+  { symbol: 'MSFT', name: 'Microsoft', sector: 'Cloud software', allocation: 34, value: 18420, returnPct: 12.4, dayPct: 0.8, thesis: 'Quality compounder with resilient cash flow and durable enterprise demand.' },
+  { symbol: 'AAPL', name: 'Apple', sector: 'Consumer technology', allocation: 24, value: 12980, returnPct: 6.7, dayPct: -0.3, thesis: 'Large-cap anchor with strong ecosystem retention and balanced volatility.' },
+  { symbol: 'NVDA', name: 'NVIDIA', sector: 'AI infrastructure', allocation: 18, value: 9740, returnPct: 21.8, dayPct: 1.9, thesis: 'Higher-growth satellite position used to demonstrate momentum monitoring.' },
+  { symbol: 'CASH', name: 'Cash reserve', sector: 'Liquidity', allocation: 24, value: 13120, returnPct: 0, dayPct: 0, thesis: 'Dry powder for staged entries and risk management in the sample portfolio.' },
 ]
 
 export const watchlist: WatchItem[] = [
-  { symbol: 'MSFT', name: 'Microsoft', price: 442.18, changePct: 0.8, signal: 'Quality compounder', rsi: 58 },
-  { symbol: 'AAPL', name: 'Apple', price: 211.07, changePct: -0.3, signal: 'Pullback watch', rsi: 49 },
-  { symbol: 'NVDA', name: 'NVIDIA', price: 139.42, changePct: 1.9, signal: 'Momentum leader', rsi: 66 },
-  { symbol: 'TSM', name: 'Taiwan Semiconductor', price: 172.31, changePct: 0.6, signal: 'Semiconductor core', rsi: 61 },
+  { symbol: 'MSFT', name: 'Microsoft', category: 'Core', price: 442.18, changePct: 0.8, signal: 'Quality compounder', rsi: 58 },
+  { symbol: 'AAPL', name: 'Apple', category: 'Pullback', price: 211.07, changePct: -0.3, signal: 'Pullback watch', rsi: 49 },
+  { symbol: 'NVDA', name: 'NVIDIA', category: 'Momentum', price: 139.42, changePct: 1.9, signal: 'Momentum leader', rsi: 66 },
+  { symbol: 'TSM', name: 'Taiwan Semiconductor', category: 'Core', price: 172.31, changePct: 0.6, signal: 'Semiconductor core', rsi: 61 },
 ]
 
 export const indicators: Indicator[] = [

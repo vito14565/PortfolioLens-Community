@@ -1,43 +1,13 @@
-import { activity, holdings, indicators, pricePath, watchlist } from './data/mockData'
+import { useMemo, useState } from 'react'
+import MetricCard from './components/MetricCard'
+import SectionHeader from './components/SectionHeader'
+import Sparkline from './components/Sparkline'
+import { activity, holdings, indicators, pricePath, watchlist, type WatchItem } from './data/mockData'
+import { money, signedPercent } from './utils/format'
 
-const money = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
+type WatchFilter = 'All' | WatchItem['category']
 
-function Sparkline() {
-  const points = pricePath
-    .map((value, index) => `${index * 24},${96 - value}`)
-    .join(' ')
-
-  return (
-    <svg className="sparkline" viewBox="0 0 360 120" role="img" aria-label="Mock stock price path">
-      <defs>
-        <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#55d6be" />
-          <stop offset="100%" stopColor="#8aa7ff" />
-        </linearGradient>
-      </defs>
-      <polyline className="sparkline-grid" points="0,88 360,88" />
-      <polyline className="sparkline-grid" points="0,52 360,52" />
-      <polyline className="sparkline-line" points={points} />
-      {pricePath.map((value, index) => (
-        <circle key={`${value}-${index}`} cx={index * 24} cy={96 - value} r="3.5" />
-      ))}
-    </svg>
-  )
-}
-
-function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return (
-    <article className="metric-card">
-      <span>{label}</span>
-      <strong>{value}</strong>
-      <p>{detail}</p>
-    </article>
-  )
-}
+const watchFilters: WatchFilter[] = ['All', 'Core', 'Momentum', 'Pullback']
 
 function Dashboard() {
   return (
@@ -60,72 +30,104 @@ function Dashboard() {
           <strong>{money.format(54260)}</strong>
           <em>+9.8% sample return</em>
         </div>
-        <Sparkline />
+        <Sparkline values={pricePath} label="Mock stock price path" />
       </div>
     </section>
   )
 }
 
 function Portfolio() {
+  const [selectedSymbol, setSelectedSymbol] = useState(holdings[0].symbol)
+  const selected = holdings.find(item => item.symbol === selectedSymbol) ?? holdings[0]
+
   return (
     <section className="section-grid" id="portfolio">
-      <div>
-        <p className="section-label">Portfolio</p>
-        <h2>Holdings without private data</h2>
-        <p className="section-copy">
-          This view demonstrates allocation, performance, and activity patterns with local mock data only.
-        </p>
-      </div>
-      <div className="panel table-panel">
-        {holdings.map(item => (
-          <div className="holding-row" key={item.symbol}>
-            <div>
-              <strong>{item.symbol}</strong>
-              <span>{item.name}</span>
-            </div>
-            <div className="bar-track">
-              <i style={{ width: `${item.allocation}%` }} />
-            </div>
-            <span>{item.allocation}%</span>
-            <span>{money.format(item.value)}</span>
-            <span className={item.returnPct >= 0 ? 'up' : 'down'}>
-              {item.returnPct > 0 ? '+' : ''}{item.returnPct}%
-            </span>
-          </div>
-        ))}
+      <SectionHeader eyebrow="Portfolio" title="Holdings without private data">
+        This view demonstrates allocation, performance, and activity patterns with local mock data only.
+      </SectionHeader>
+      <div className="portfolio-workspace">
+        <div className="panel table-panel">
+          {holdings.map(item => (
+            <button
+              className={`holding-row ${item.symbol === selectedSymbol ? 'selected' : ''}`}
+              key={item.symbol}
+              onClick={() => setSelectedSymbol(item.symbol)}
+              type="button"
+            >
+              <div>
+                <strong>{item.symbol}</strong>
+                <span>{item.name}</span>
+              </div>
+              <div className="bar-track">
+                <i style={{ width: `${item.allocation}%` }} />
+              </div>
+              <span>{item.allocation}%</span>
+              <span>{money.format(item.value)}</span>
+              <span className={item.returnPct >= 0 ? 'up' : 'down'}>
+                {signedPercent(item.returnPct)}
+              </span>
+            </button>
+          ))}
+        </div>
+        <aside className="panel holding-detail" aria-live="polite">
+          <span>Selected holding</span>
+          <h3>{selected.symbol}</h3>
+          <p>{selected.thesis}</p>
+          <dl>
+            <div><dt>Sector</dt><dd>{selected.sector}</dd></div>
+            <div><dt>Day move</dt><dd className={selected.dayPct >= 0 ? 'up' : 'down'}>{signedPercent(selected.dayPct)}</dd></div>
+            <div><dt>Value</dt><dd>{money.format(selected.value)}</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
   )
 }
 
 function Watchlist() {
+  const [filter, setFilter] = useState<WatchFilter>('All')
+  const filtered = useMemo(
+    () => filter === 'All' ? watchlist : watchlist.filter(item => item.category === filter),
+    [filter],
+  )
+
   return (
     <section className="section-grid" id="watchlist">
+      <SectionHeader eyebrow="Watchlist" title="Sample securities radar">
+        Watchlist rows show how price, signal labels, and technical context can be presented without
+        connecting to a market data provider.
+      </SectionHeader>
       <div>
-        <p className="section-label">Watchlist</p>
-        <h2>Sample securities radar</h2>
-        <p className="section-copy">
-          Watchlist rows show how price, signal labels, and technical context can be presented without
-          connecting to a market data provider.
-        </p>
-      </div>
-      <div className="panel watchlist-panel">
-        {watchlist.map(item => (
-          <article className="watch-card" key={item.symbol}>
-            <div>
-              <strong>{item.symbol}</strong>
-              <span>{item.name}</span>
-            </div>
-            <p>{item.signal}</p>
-            <div className="watch-meta">
-              <span>{money.format(item.price)}</span>
-              <span className={item.changePct >= 0 ? 'up' : 'down'}>
-                {item.changePct > 0 ? '+' : ''}{item.changePct}%
-              </span>
-              <span>RSI {item.rsi}</span>
-            </div>
-          </article>
-        ))}
+        <div className="filter-row" aria-label="Watchlist filters">
+          {watchFilters.map(item => (
+            <button
+              className={item === filter ? 'active' : ''}
+              key={item}
+              onClick={() => setFilter(item)}
+              type="button"
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+        <div className="panel watchlist-panel">
+          {filtered.map(item => (
+            <article className="watch-card" key={item.symbol}>
+              <div>
+                <strong>{item.symbol}</strong>
+                <span>{item.name}</span>
+              </div>
+              <p>{item.signal}</p>
+              <div className="watch-meta">
+                <span>{money.format(item.price)}</span>
+                <span className={item.changePct >= 0 ? 'up' : 'down'}>
+                  {signedPercent(item.changePct)}
+                </span>
+                <span>RSI {item.rsi}</span>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -141,7 +143,7 @@ function Research() {
           The community edition keeps the research-page structure while replacing prediction and scoring
           engines with static sample values.
         </p>
-        <Sparkline />
+        <Sparkline values={pricePath} label="Mock technical research price path" />
       </div>
       <div className="indicator-grid">
         {indicators.map(item => (

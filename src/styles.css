@@ -262,17 +262,39 @@ p {
   padding: 22px;
 }
 
+.portfolio-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 14px;
+}
+
 .holding-row {
   display: grid;
   grid-template-columns: 1.1fr 1fr 50px 100px 70px;
   gap: 14px;
   align-items: center;
+  width: 100%;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 }
 
 .holding-row:last-child {
   border-bottom: 0;
+}
+
+.holding-row.selected {
+  margin-inline: -10px;
+  padding-inline: 10px;
+  border-radius: 14px;
+  background: rgba(85, 214, 190, 0.08);
 }
 
 .holding-row div:first-child,
@@ -301,6 +323,71 @@ p {
 
 .down {
   color: var(--red) !important;
+}
+
+.holding-detail {
+  padding: 18px;
+}
+
+.holding-detail > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.holding-detail h3 {
+  margin: 12px 0 0;
+  font-size: 34px;
+}
+
+.holding-detail dl {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+}
+
+.holding-detail dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.holding-detail dt {
+  color: var(--muted);
+}
+
+.holding-detail dd {
+  margin: 0;
+  font-weight: 800;
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.filter-row button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.filter-row button.active,
+.filter-row button:hover {
+  border-color: rgba(85, 214, 190, 0.38);
+  background: rgba(85, 214, 190, 0.12);
+  color: var(--green);
 }
 
 .watchlist-panel {
@@ -441,6 +528,10 @@ footer {
   .holding-row {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .portfolio-workspace {
+    grid-template-columns: 1fr;
   }
 
   .watchlist-panel,
