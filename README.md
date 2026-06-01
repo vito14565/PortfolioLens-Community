@@ -5,6 +5,7 @@ PortfolioLens Community is a public, mock-data showcase for a modern portfolio a
 ## What This Is
 
 - A React + TypeScript + Vite frontend demo
+- A small dependency-free Python mock analytics script
 - A polished fintech dashboard UI
 - Portfolio tracking screens using sample data
 - Watchlist and stock analysis layouts
@@ -29,6 +30,7 @@ All data in this repository is static mock data for UI demonstration only.
 - Watchlist page with sortable sample securities
 - Stock research page with chart-like price history, signal summary, and technical indicators
 - Responsive layout for desktop and mobile
+- Local Python utility that turns fictional sample holdings into a markdown analytics report
 - Safe local development with no private services required
 
 ## Tech Stack
@@ -36,6 +38,7 @@ All data in this repository is static mock data for UI demonstration only.
 - React
 - TypeScript
 - Vite
+- Python standard library
 - CSS custom properties
 - Static mock data
 
@@ -54,6 +57,12 @@ Build check:
 
 ```bash
 npm run build
+```
+
+Generate the mock analytics report:
+
+```bash
+python3 tools/mock_analytics.py
 ```
 
 ## Environment Variables

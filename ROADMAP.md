@@ -5,6 +5,7 @@
 - Add screenshots for the dashboard, portfolio, watchlist, and stock research views.
 - Add small interaction tests for tab switching and mock data rendering.
 - Add optional light theme support.
+- Add a tiny Python test for mock analytics report generation.
 
 ## Community Enhancements
 

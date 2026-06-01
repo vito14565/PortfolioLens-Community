@@ -1,0 +1,38 @@
+{
+  "portfolio_name": "Community Sample Portfolio",
+  "currency": "USD",
+  "holdings": [
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "sector": "Cloud software",
+      "allocation": 34,
+      "value": 18420,
+      "return_pct": 12.4
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "sector": "Consumer technology",
+      "allocation": 24,
+      "value": 12980,
+      "return_pct": 6.7
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "sector": "AI infrastructure",
+      "allocation": 18,
+      "value": 9740,
+      "return_pct": 21.8
+    },
+    {
+      "symbol": "CASH",
+      "name": "Cash reserve",
+      "sector": "Liquidity",
+      "allocation": 24,
+      "value": 13120,
+      "return_pct": 0
+    }
+  ]
+}
